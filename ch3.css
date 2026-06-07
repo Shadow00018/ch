@@ -1,717 +1,431 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* ========================================= */
+/* RESPONSIVE DESIGN FOR ALL DEVICES */
+/* ADD THIS AT THE VERY BOTTOM OF CSS */
+/* ========================================= */
 
-<title>Gaming Community Server</title>
+/* ========================= */
+/* 4K MONITORS */
+/* ========================= */
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+@media (min-width: 1800px){
 
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
+.hero h1{
+    font-size:220px;
 }
 
-body{
-    background:#05010d;
-    overflow-x:hidden;
-    color:white;
-    font-family:'Poppins',sans-serif;
+.big{
+    font-size:180px;
 }
 
-/* LOADER */
-
-.loader{
-    position:fixed;
-    inset:0;
-    background:#05010d;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-    flex-direction:column;
-    transition:1s;
-}
-
-.loader h1{
-    font-family:'Orbitron',sans-serif;
-    font-size:70px;
-    color:#ff00ff;
-    text-shadow:0 0 20px #ff00ff;
-}
-
-.bar{
-    width:300px;
-    height:8px;
-    background:#222;
-    margin-top:20px;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#ff00ff,#00ffff);
-    animation:loading 3s forwards;
-}
-
-@keyframes loading{
-    to{
-        width:100%;
-    }
-}
-
-/* CURSOR */
-
-.cursor{
-    width:22px;
-    height:22px;
-    border:2px solid #ff00ff;
-    border-radius:50%;
-    position:fixed;
-    pointer-events:none;
-    transform:translate(-50%,-50%);
-    z-index:999999;
-    box-shadow:0 0 20px #ff00ff;
-}
-
-/* BACKGROUND */
-
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-2;
-}
-
-.glow1,
-.glow2{
-    position:fixed;
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    filter:blur(120px);
-    z-index:-1;
-}
-
-.glow1{
-    background:#ff00ff33;
-    top:-100px;
-    left:-100px;
-}
-
-.glow2{
-    background:#00ffff22;
-    bottom:-100px;
-    right:-100px;
-}
-
-/* NAVBAR */
-
-nav{
-    position:fixed;
-    width:100%;
-    top:0;
-    left:0;
-    padding:20px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.2);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-}
-
-.logo{
-    font-family:'Orbitron',sans-serif;
-    font-size:30px;
-    font-weight:800;
-    color:#ff00ff;
-}
-
-nav ul{
-    display:flex;
-    list-style:none;
-    gap:40px;
-}
-
-nav ul li a{
-    color:white;
-    text-decoration:none;
-}
-
-/* HERO */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 8%;
-    gap:50px;
-}
-
-.left{
-    width:50%;
-}
-
-.tag{
-    display:inline-block;
-    padding:12px 25px;
-    border:1px solid #ff00ff;
-    border-radius:40px;
-    color:#ff00ff;
-    margin-bottom:25px;
-}
-
-.left h1{
-    font-size:90px;
-    line-height:1;
-    font-family:'Orbitron',sans-serif;
-}
-
-.left h1 span{
-    color:#ff00ff;
-}
-
-.left p{
-    color:#bbb;
-    margin-top:25px;
-    line-height:1.8;
-}
-
-.buttons{
-    margin-top:40px;
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    padding:15px 35px;
-    border-radius:50px;
-    text-decoration:none;
-    transition:0.4s;
-    font-weight:600;
-}
-
-.primary{
-    background:#ff00ff;
-    color:white;
-    box-shadow:0 0 25px #ff00ff;
-}
-
-.secondary{
-    border:2px solid #00ffff;
-    color:#00ffff;
-}
-
-.secondary:hover{
-    background:#00ffff;
-    color:black;
-}
-
-.right{
-    width:40%;
-}
-
-.card{
-    width:100%;
-    height:500px;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
-    transition:0.2s;
-    box-shadow:0 0 40px #ff00ff33;
-}
-
-.card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* COUNTER */
-
-.live{
-    padding:50px 8%;
-}
-
-.live-box{
-    display:flex;
-    justify-content:space-around;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.counter{
-    flex:1;
-    min-width:220px;
-    background:rgba(255,255,255,0.05);
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-}
-
-.counter h2{
-    font-size:50px;
-    color:#00ffff;
-}
-
-/* FEATURES */
-
-.section{
-    padding:120px 8%;
-}
-
-.title{
-    text-align:center;
-    font-size:60px;
-    margin-bottom:70px;
-    font-family:'Orbitron',sans-serif;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+.hero p{
+    font-size:24px;
+    max-width:1000px;
 }
 
 .feature{
-    background:rgba(255,255,255,0.05);
-    padding:45px;
-    border-radius:25px;
-    transition:0.4s;
+    padding:70px;
 }
 
-.feature:hover{
-    transform:translateY(-10px);
+.feature h2{
+    font-size:50px;
 }
 
-.feature h3{
-    color:#ff00ff;
-    margin-bottom:20px;
+.float-card{
+    width:320px;
+    height:420px;
 }
 
-/* GALLERY */
+}
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+/* ========================= */
+/* LARGE LAPTOPS */
+/* ========================= */
+
+@media (max-width: 1440px){
+
+.hero h1{
+    font-size:120px;
+}
+
+.big{
+    font-size:100px;
+}
+
+.float-card{
+    width:240px;
+    height:300px;
+}
+
+}
+
+/* ========================= */
+/* NORMAL LAPTOPS */
+/* ========================= */
+
+@media (max-width: 1200px){
+
+.hero{
+    padding:0 5%;
+}
+
+.hero h1{
+    font-size:90px;
+}
+
+.big{
+    font-size:80px;
+}
+
+.hero p{
+    font-size:16px;
+}
+
+.grid{
     gap:25px;
 }
 
-.gallery img{
-    width:100%;
-    border-radius:20px;
-}
-
-/* DISCORD */
-
-.discord{
-    padding:120px 8%;
-    text-align:center;
-}
-
-.discord-box{
-    background:linear-gradient(135deg,#1a002f,#090014);
-    padding:70px;
-    border-radius:30px;
-}
-
-.discord-box h2{
-    font-size:60px;
-}
-
-.discord-box p{
-    margin-top:20px;
-    color:#bbb;
-    margin-bottom:35px;
-}
-
-/* FOOTER */
-
-footer{
+.feature{
     padding:40px;
-    text-align:center;
-    color:#777;
 }
 
-/* RESPONSIVE */
+.feature h2{
+    font-size:32px;
+}
 
-@media(max-width:1000px){
+.float-card{
+    width:200px;
+    height:260px;
+}
+
+}
+
+/* ========================= */
+/* SMALL LAPTOPS */
+/* ========================= */
+
+@media (max-width: 1024px){
+
+nav{
+    padding:25px 5%;
+}
+
+nav ul{
+    gap:25px;
+}
 
 .hero{
     flex-direction:column;
+    justify-content:center;
     text-align:center;
     padding-top:140px;
+    min-height:auto;
 }
 
-.left,
-.right{
+.hero-content{
     width:100%;
 }
 
-.left h1{
-    font-size:60px;
+.hero h1{
+    font-size:70px;
+}
+
+.hero p{
+    font-size:15px;
+    max-width:700px;
 }
 
 .buttons{
     justify-content:center;
 }
 
+.big{
+    font-size:65px;
 }
 
-@media(max-width:700px){
+.grid{
+    grid-template-columns:1fr 1fr;
+}
+
+.float-card{
+    width:180px;
+    height:230px;
+}
+
+.card1{
+    left:2%;
+}
+
+.card2{
+    right:2%;
+}
+
+.card3{
+    left:10%;
+}
+
+.card4{
+    right:10%;
+}
+
+}
+
+/* ========================= */
+/* TABLETS */
+/* ========================= */
+
+@media (max-width: 768px){
+
+body{
+    overflow-x:hidden;
+}
+
+nav{
+    padding:20px 5%;
+}
 
 nav ul{
     display:none;
 }
 
-.left h1{
+.logo{
+    font-size:22px;
+}
+
+.hero{
+    padding:130px 20px 80px;
+}
+
+.hero h1{
+    font-size:52px;
+    line-height:1;
+}
+
+.hero p{
+    font-size:14px;
+    line-height:1.8;
+    margin:30px auto;
+}
+
+.tag{
+    font-size:11px;
+    padding:10px 20px;
+}
+
+.buttons{
+    flex-direction:column;
+    align-items:center;
+}
+
+.btn{
+    width:240px;
+    text-align:center;
+    padding:16px 30px;
+}
+
+.big{
+    font-size:48px;
+    margin-bottom:60px;
+}
+
+.section{
+    padding:120px 20px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.feature{
+    padding:35px;
+    border-radius:25px;
+}
+
+.feature h2{
+    font-size:28px;
+}
+
+.feature p{
+    font-size:14px;
+}
+
+.float-card{
+    width:140px;
+    height:180px;
+    border-radius:20px;
+}
+
+.marquee{
+    margin-top:90px;
+}
+
+.track span{
+    font-size:55px;
+}
+
+footer{
+    padding:50px 20px;
+}
+
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 480px){
+
+.hero{
+    min-height:100vh;
+    padding:120px 15px 50px;
+}
+
+.hero h1{
     font-size:42px;
 }
 
-.title{
-    font-size:40px;
+.hero p{
+    font-size:13px;
 }
 
-.discord-box h2{
-    font-size:40px;
+.tag{
+    font-size:10px;
+    letter-spacing:2px;
 }
 
-.loader h1{
+.btn{
+    width:100%;
+    max-width:280px;
+    font-size:14px;
+}
+
+.big{
+    font-size:38px;
+}
+
+.feature{
+    padding:28px;
+}
+
+.feature h2{
+    font-size:24px;
+}
+
+.feature p{
+    font-size:13px;
+}
+
+.float-card{
+    display:none;
+}
+
+.cursor{
+    display:none;
+}
+
+.track span{
+    font-size:42px;
+    margin-right:40px;
+}
+
+footer{
+    font-size:13px;
+}
+
+}
+
+/* ========================= */
+/* VERY SMALL DEVICES */
+/* ========================= */
+
+@media (max-width: 360px){
+
+.hero h1{
+    font-size:34px;
+}
+
+.big{
+    font-size:30px;
+}
+
+.hero p{
+    font-size:12px;
+}
+
+.btn{
+    padding:14px 20px;
+    font-size:13px;
+}
+
+.feature{
+    padding:22px;
+}
+
+.feature h2{
+    font-size:20px;
+}
+
+}
+
+/* ========================= */
+/* LANDSCAPE PHONES */
+/* ========================= */
+
+@media (max-height: 500px) and (orientation: landscape){
+
+.hero{
+    padding-top:100px;
+    padding-bottom:60px;
+}
+
+.hero h1{
+    font-size:50px;
+}
+
+.float-card{
+    display:none;
+}
+
+.big{
     font-size:45px;
 }
 
-.card{
-    height:350px;
+}
+
+/* ========================= */
+/* TOUCH DEVICES */
+/* ========================= */
+
+@media (hover:none){
+
+.cursor{
+    display:none;
+}
+
+.feature:hover{
+    transform:none;
+}
+
+.btn:hover{
+    transform:none;
+}
+
+.float-card{
+    animation-duration:10s;
 }
 
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="loader" id="loader">
-<h1>Gaming Community</h1>
-
-<div class="bar">
-<div class="fill"></div>
-</div>
-</div>
-
-<div class="cursor"></div>
-
-<canvas id="canvas"></canvas>
-
-<div class="glow1"></div>
-<div class="glow2"></div>
-
-<nav>
-
-<div class="logo">GC SERVER</div>
-
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#gallery">Gallery</a></li>
-<li><a href="#discord">Discord</a></li>
-</ul>
-
-</nav>
-
-<section class="hero">
-
-<div class="left">
-
-<div class="tag">
-NEXT GEN COMMUNITY
-</div>
-
-<h1>
-GAMING <br>
-<span>COMMUNITY</span>
-</h1>
-
-<p>
-Join the ultimate gaming community server with live tournaments,
-events, giveaways, Discord activities, and futuristic cyberpunk vibes.
-</p>
-
-<div class="buttons">
-
-<a href="#" class="btn primary">
-JOIN SERVER
-</a>
-
-<a href="#" class="btn secondary">
-WATCH TRAILER
-</a>
-
-</div>
-
-</div>
-
-<div class="right">
-
-<div class="card" id="card">
-
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop" alt="gaming">
-
-</div>
-
-</div>
-
-</section>
-
-<section class="live">
-
-<div class="live-box">
-
-<div class="counter">
-<h2 id="players">0</h2>
-<p>Players Online</p>
-</div>
-
-<div class="counter">
-<h2 id="members">0</h2>
-<p>Discord Members</p>
-</div>
-
-<div class="counter">
-<h2 id="events">0</h2>
-<p>Events Hosted</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section" id="features">
-
-<h2 class="title">FEATURES</h2>
-
-<div class="cards">
-
-<div class="feature">
-<h3>24/7 Events</h3>
-<p>Daily scrims, tournaments, giveaways, and fun activities.</p>
-</div>
-
-<div class="feature">
-<h3>Voice Chat</h3>
-<p>High quality voice rooms and private gaming squads.</p>
-</div>
-
-<div class="feature">
-<h3>Anti Cheat</h3>
-<p>Secure and fair gameplay experience for everyone.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section" id="gallery">
-
-<h2 class="title">GALLERY</h2>
-
-<div class="gallery">
-
-<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1971&auto=format&fit=crop">
-
-<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop">
-
-<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop">
-
-<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1974&auto=format&fit=crop">
-
-</div>
-
-</section>
-
-<section class="discord" id="discord">
-
-<div class="discord-box">
-
-<h2>JOIN OUR DISCORD</h2>
-
-<p>
-Meet gamers, create squads, participate in events,
-and become part of the best gaming community.
-</p>
-
-<a href="#" class="btn primary">
-JOIN COMMUNITY
-</a>
-
-</div>
-
-</section>
-
-<footer>
-© 2026 Gaming Community Server
-</footer>
-
-<script>
-
-/* LOADER */
-
-window.addEventListener('load',()=>{
-
-setTimeout(()=>{
-
-document.getElementById('loader').style.opacity='0';
-
-setTimeout(()=>{
-
-document.getElementById('loader').style.display='none';
-
-},1000);
-
-},2000);
-
-});
-
-/* CURSOR */
-
-const cursor=document.querySelector('.cursor');
-
-document.addEventListener('mousemove',(e)=>{
-
-cursor.style.left=e.clientX+'px';
-cursor.style.top=e.clientY+'px';
-
-});
-
-/* CANVAS */
-
-const canvas=document.getElementById('canvas');
-const ctx=canvas.getContext('2d');
-
-function resizeCanvas(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
+/* ========================= */
+/* HIGH DPI DEVICES */
+/* ========================= */
+
+@media (-webkit-min-device-pixel-ratio:2),
+(min-resolution:192dpi){
+
+.hero h1,
+.big,
+.logo{
+    text-rendering:optimizeLegibility;
 }
 
-resizeCanvas();
-
-window.addEventListener('resize',resizeCanvas);
-
-let particles=[];
-
-for(let i=0;i<120;i++){
-
-particles.push({
-
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2,
-speed:Math.random()*1
-
-});
-
 }
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle='white';
-
-particles.forEach(p=>{
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-ctx.fill();
-
-p.y-=p.speed;
-
-if(p.y<0){
-
-p.y=canvas.height;
-p.x=Math.random()*canvas.width;
-
-}
-
-});
-
-requestAnimationFrame(animate);
-
-}
-
-animate();
-
-/* CARD EFFECT */
-
-const card=document.getElementById('card');
-
-card.addEventListener('mousemove',(e)=>{
-
-let rect=card.getBoundingClientRect();
-
-let x=e.clientX-rect.left;
-let y=e.clientY-rect.top;
-
-let centerX=rect.width/2;
-let centerY=rect.height/2;
-
-let rotateX=((y-centerY)/20);
-let rotateY=((centerX-x)/20);
-
-card.style.transform=
-`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-});
-
-card.addEventListener('mouseleave',()=>{
-
-card.style.transform='rotateX(0deg) rotateY(0deg)';
-
-});
-
-/* COUNTER */
-
-function animateCounter(id,target){
-
-let count=0;
-
-let speed=target/200;
-
-let interval=setInterval(()=>{
-
-count+=speed;
-
-if(count>=target){
-
-count=target;
-clearInterval(interval);
-
-}
-
-document.getElementById(id).innerText=
-Math.floor(count).toLocaleString();
-
-},10);
-
-}
-
-animateCounter('players',250000);
-animateCounter('members',120000);
-animateCounter('events',15000);
-
-</script>
-
-</body>
-</html>

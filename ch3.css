@@ -1,431 +1,886 @@
-/* ========================================= */
-/* RESPONSIVE DESIGN FOR ALL DEVICES */
-/* ADD THIS AT THE VERY BOTTOM OF CSS */
-/* ========================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* ========================= */
-/* 4K MONITORS */
-/* ========================= */
+<title>Gaming Community Universe</title>
 
-@media (min-width: 1800px){
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-.hero h1{
-    font-size:220px;
+<style>
+
+/* ================================================= */
+/* RESET */
+/* ================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.big{
-    font-size:180px;
+html{
+    scroll-behavior:smooth;
 }
 
-.hero p{
-    font-size:24px;
-    max-width:1000px;
+body{
+    background:#020202;
+    color:white;
+    overflow-x:hidden;
+    font-family:'Inter',sans-serif;
 }
 
-.feature{
-    padding:70px;
+/* ================================================= */
+/* WEBGL */
+/* ================================================= */
+
+#bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-5;
 }
 
-.feature h2{
-    font-size:50px;
+/* ================================================= */
+/* NOISE */
+/* ================================================= */
+
+.noise{
+    position:fixed;
+    inset:0;
+    background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity:0.05;
+    pointer-events:none;
+    z-index:99999;
 }
 
-.float-card{
-    width:320px;
-    height:420px;
+/* ================================================= */
+/* CURSOR */
+/* ================================================= */
+
+.cursor{
+    width:30px;
+    height:30px;
+    border:2px solid white;
+    border-radius:50%;
+    position:fixed;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:999999;
+    mix-blend-mode:difference;
 }
 
-}
-
-/* ========================= */
-/* LARGE LAPTOPS */
-/* ========================= */
-
-@media (max-width: 1440px){
-
-.hero h1{
-    font-size:120px;
-}
-
-.big{
-    font-size:100px;
-}
-
-.float-card{
-    width:240px;
-    height:300px;
-}
-
-}
-
-/* ========================= */
-/* NORMAL LAPTOPS */
-/* ========================= */
-
-@media (max-width: 1200px){
-
-.hero{
-    padding:0 5%;
-}
-
-.hero h1{
-    font-size:90px;
-}
-
-.big{
-    font-size:80px;
-}
-
-.hero p{
-    font-size:16px;
-}
-
-.grid{
-    gap:25px;
-}
-
-.feature{
-    padding:40px;
-}
-
-.feature h2{
-    font-size:32px;
-}
-
-.float-card{
-    width:200px;
-    height:260px;
-}
-
-}
-
-/* ========================= */
-/* SMALL LAPTOPS */
-/* ========================= */
-
-@media (max-width: 1024px){
+/* ================================================= */
+/* NAVBAR */
+/* ================================================= */
 
 nav{
-    padding:25px 5%;
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:30px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+
+.logo{
+    font-family:'Orbitron',sans-serif;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:4px;
 }
 
 nav ul{
-    gap:25px;
+    display:flex;
+    gap:45px;
+    list-style:none;
 }
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    opacity:0.7;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    opacity:1;
+}
+
+/* ================================================= */
+/* HERO */
+/* ================================================= */
 
 .hero{
-    flex-direction:column;
+    min-height:100vh;
+    position:relative;
+    display:flex;
     justify-content:center;
-    text-align:center;
-    padding-top:140px;
-    min-height:auto;
+    align-items:center;
+    overflow:hidden;
 }
+
+/* GLOW */
+
+.glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:#6f00ff22;
+    filter:blur(120px);
+    animation:rotateGlow 12s linear infinite;
+}
+
+@keyframes rotateGlow{
+
+0%{
+    transform:rotate(0deg) scale(1);
+}
+
+50%{
+    transform:rotate(180deg) scale(1.2);
+}
+
+100%{
+    transform:rotate(360deg) scale(1);
+}
+
+}
+
+/* HERO CONTENT */
 
 .hero-content{
-    width:100%;
+    position:relative;
+    z-index:5;
+    width:90%;
+    text-align:center;
 }
+
+/* TAG */
+
+.tag{
+    display:inline-block;
+    padding:12px 25px;
+    border-radius:100px;
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(20px);
+    margin-bottom:40px;
+    font-size:13px;
+    letter-spacing:3px;
+}
+
+/* TITLE */
 
 .hero h1{
-    font-size:70px;
+    font-size:10vw;
+    line-height:0.85;
+    text-transform:uppercase;
+    font-weight:900;
+    font-family:'Orbitron',sans-serif;
 }
+
+.hero h1 span{
+    color:#8f5cff;
+    text-shadow:0 0 40px #8f5cff;
+}
+
+/* TEXT */
 
 .hero p{
-    font-size:15px;
-    max-width:700px;
+    max-width:800px;
+    margin:40px auto;
+    color:#bbb;
+    line-height:1.9;
+    font-size:18px;
 }
 
+/* BUTTONS */
+
 .buttons{
+    display:flex;
     justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:18px 45px;
+    border-radius:100px;
+    text-decoration:none;
+    transition:0.4s;
+    font-weight:600;
+    position:relative;
+    overflow:hidden;
+}
+
+.primary{
+    background:white;
+    color:black;
+}
+
+.primary:hover{
+    transform:translateY(-5px) scale(1.05);
+}
+
+.secondary{
+    border:1px solid rgba(255,255,255,0.15);
+    color:white;
+    backdrop-filter:blur(20px);
+}
+
+.secondary:hover{
+    background:white;
+    color:black;
+}
+
+/* ================================================= */
+/* FLOATING 3D CARDS */
+/* ================================================= */
+
+.cards-container{
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+
+/* CARD */
+
+.float-card{
+    position:absolute;
+    width:260px;
+    height:320px;
+    border-radius:35px;
+    overflow:hidden;
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.04);
+    transform-style:preserve-3d;
+    transition:0.3s;
+    box-shadow:0 25px 60px rgba(0,0,0,0.5);
+}
+
+/* IMAGES */
+
+.float-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.9;
+}
+
+/* POSITIONS */
+
+.card1{
+    top:15%;
+    left:8%;
+    animation:float1 7s ease-in-out infinite;
+}
+
+.card2{
+    top:20%;
+    right:10%;
+    animation:float2 6s ease-in-out infinite;
+}
+
+.card3{
+    bottom:10%;
+    left:18%;
+    animation:float3 8s ease-in-out infinite;
+}
+
+.card4{
+    bottom:8%;
+    right:15%;
+    animation:float4 9s ease-in-out infinite;
+}
+
+/* FLOAT ANIMATIONS */
+
+@keyframes float1{
+
+0%,100%{
+    transform:translateY(0px) rotate(-8deg);
+}
+
+50%{
+    transform:translateY(-30px) rotate(-4deg);
+}
+
+}
+
+@keyframes float2{
+
+0%,100%{
+    transform:translateY(0px) rotate(8deg);
+}
+
+50%{
+    transform:translateY(25px) rotate(4deg);
+}
+
+}
+
+@keyframes float3{
+
+0%,100%{
+    transform:translateY(0px) rotate(6deg);
+}
+
+50%{
+    transform:translateY(-20px) rotate(2deg);
+}
+
+}
+
+@keyframes float4{
+
+0%,100%{
+    transform:translateY(0px) rotate(-6deg);
+}
+
+50%{
+    transform:translateY(20px) rotate(-2deg);
+}
+
+}
+
+/* ================================================= */
+/* HUGE SECTION */
+/* ================================================= */
+
+.section{
+    padding:200px 8%;
+    position:relative;
+}
+
+/* TITLE */
+
+.big{
+    font-size:8vw;
+    line-height:0.9;
+    text-transform:uppercase;
+    font-weight:900;
+    margin-bottom:80px;
+    font-family:'Orbitron',sans-serif;
+}
+
+.big span{
+    color:#8f5cff;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:40px;
+}
+
+/* FEATURE */
+
+.feature{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+    border-radius:35px;
+    padding:50px;
+    transition:0.5s;
+    position:relative;
+    overflow:hidden;
+}
+
+.feature::before{
+    content:'';
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:#8f5cff22;
+    border-radius:50%;
+    top:-150px;
+    right:-150px;
+    filter:blur(50px);
+}
+
+.feature:hover{
+    transform:translateY(-15px) rotateX(5deg);
+}
+
+/* TEXT */
+
+.feature h2{
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.feature p{
+    color:#bbb;
+    line-height:1.9;
+}
+
+/* ================================================= */
+/* MARQUEE */
+/* ================================================= */
+
+.marquee{
+    width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+    margin-top:140px;
+}
+
+.track{
+    display:inline-block;
+    animation:marquee 25s linear infinite;
+}
+
+.track span{
+    font-size:8vw;
+    margin-right:80px;
+    font-weight:900;
+    color:#151515;
+    text-transform:uppercase;
+}
+
+@keyframes marquee{
+
+0%{
+    transform:translateX(0%);
+}
+
+100%{
+    transform:translateX(-50%);
+}
+
+}
+
+/* ================================================= */
+/* FOOTER */
+/* ================================================= */
+
+footer{
+    padding:80px;
+    text-align:center;
+    color:#666;
+}
+
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
+
+@media(max-width:1100px){
+
+.hero h1{
+    font-size:80px;
 }
 
 .big{
-    font-size:65px;
-}
-
-.grid{
-    grid-template-columns:1fr 1fr;
+    font-size:60px;
 }
 
 .float-card{
     width:180px;
-    height:230px;
-}
-
-.card1{
-    left:2%;
-}
-
-.card2{
-    right:2%;
-}
-
-.card3{
-    left:10%;
-}
-
-.card4{
-    right:10%;
+    height:240px;
 }
 
 }
 
-/* ========================= */
-/* TABLETS */
-/* ========================= */
-
-@media (max-width: 768px){
-
-body{
-    overflow-x:hidden;
-}
-
-nav{
-    padding:20px 5%;
-}
+@media(max-width:700px){
 
 nav ul{
     display:none;
-}
-
-.logo{
-    font-size:22px;
-}
-
-.hero{
-    padding:130px 20px 80px;
-}
-
-.hero h1{
-    font-size:52px;
-    line-height:1;
-}
-
-.hero p{
-    font-size:14px;
-    line-height:1.8;
-    margin:30px auto;
-}
-
-.tag{
-    font-size:11px;
-    padding:10px 20px;
-}
-
-.buttons{
-    flex-direction:column;
-    align-items:center;
-}
-
-.btn{
-    width:240px;
-    text-align:center;
-    padding:16px 30px;
-}
-
-.big{
-    font-size:48px;
-    margin-bottom:60px;
-}
-
-.section{
-    padding:120px 20px;
-}
-
-.grid{
-    grid-template-columns:1fr;
-}
-
-.feature{
-    padding:35px;
-    border-radius:25px;
-}
-
-.feature h2{
-    font-size:28px;
-}
-
-.feature p{
-    font-size:14px;
-}
-
-.float-card{
-    width:140px;
-    height:180px;
-    border-radius:20px;
-}
-
-.marquee{
-    margin-top:90px;
-}
-
-.track span{
-    font-size:55px;
-}
-
-footer{
-    padding:50px 20px;
-}
-
-}
-
-/* ========================= */
-/* MOBILE */
-/* ========================= */
-
-@media (max-width: 480px){
-
-.hero{
-    min-height:100vh;
-    padding:120px 15px 50px;
-}
-
-.hero h1{
-    font-size:42px;
-}
-
-.hero p{
-    font-size:13px;
-}
-
-.tag{
-    font-size:10px;
-    letter-spacing:2px;
-}
-
-.btn{
-    width:100%;
-    max-width:280px;
-    font-size:14px;
-}
-
-.big{
-    font-size:38px;
-}
-
-.feature{
-    padding:28px;
-}
-
-.feature h2{
-    font-size:24px;
-}
-
-.feature p{
-    font-size:13px;
-}
-
-.float-card{
-    display:none;
-}
-
-.cursor{
-    display:none;
-}
-
-.track span{
-    font-size:42px;
-    margin-right:40px;
-}
-
-footer{
-    font-size:13px;
-}
-
-}
-
-/* ========================= */
-/* VERY SMALL DEVICES */
-/* ========================= */
-
-@media (max-width: 360px){
-
-.hero h1{
-    font-size:34px;
-}
-
-.big{
-    font-size:30px;
-}
-
-.hero p{
-    font-size:12px;
-}
-
-.btn{
-    padding:14px 20px;
-    font-size:13px;
-}
-
-.feature{
-    padding:22px;
-}
-
-.feature h2{
-    font-size:20px;
-}
-
-}
-
-/* ========================= */
-/* LANDSCAPE PHONES */
-/* ========================= */
-
-@media (max-height: 500px) and (orientation: landscape){
-
-.hero{
-    padding-top:100px;
-    padding-bottom:60px;
 }
 
 .hero h1{
     font-size:50px;
 }
 
-.float-card{
-    display:none;
-}
-
 .big{
-    font-size:45px;
-}
-
-}
-
-/* ========================= */
-/* TOUCH DEVICES */
-/* ========================= */
-
-@media (hover:none){
-
-.cursor{
-    display:none;
-}
-
-.feature:hover{
-    transform:none;
-}
-
-.btn:hover{
-    transform:none;
+    font-size:42px;
 }
 
 .float-card{
-    animation-duration:10s;
+    display:none;
 }
 
 }
 
-/* ========================= */
-/* HIGH DPI DEVICES */
-/* ========================= */
+</style>
+</head>
 
-@media (-webkit-min-device-pixel-ratio:2),
-(min-resolution:192dpi){
+<body>
 
-.hero h1,
-.big,
-.logo{
-    text-rendering:optimizeLegibility;
+<!-- WEBGL -->
+
+<canvas id="bg"></canvas>
+
+<!-- NOISE -->
+
+<div class="noise"></div>
+
+<!-- CURSOR -->
+
+<div class="cursor"></div>
+
+<!-- NAV -->
+
+<nav>
+
+<div class="logo">
+GC UNIVERSE
+</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Games</a></li>
+<li><a href="#">Community</a></li>
+<li><a href="#">Events</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="glow"></div>
+
+<!-- FLOATING CARDS -->
+
+<div class="cards-container">
+
+<div class="float-card card1">
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1974&auto=format&fit=crop">
+</div>
+
+<div class="float-card card2">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1971&auto=format&fit=crop">
+</div>
+
+<div class="float-card card3">
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1974&auto=format&fit=crop">
+</div>
+
+<div class="float-card card4">
+<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1974&auto=format&fit=crop">
+</div>
+
+</div>
+
+<!-- HERO CONTENT -->
+
+<div class="hero-content">
+
+<div class="tag">
+MULTI GAME COMMUNITY SERVER
+</div>
+
+<h1>
+Enter The <br>
+<span>Universe</span>
+</h1>
+
+<p>
+A futuristic multi-game ecosystem for Minecraft,
+Valorant, Fortnite, GTA RP, creators, survival players,
+events, squads, and next generation gaming experiences.
+</p>
+
+<div class="buttons">
+
+<a href="#" class="btn primary">
+Join Server
+</a>
+
+<a href="#" class="btn secondary">
+Explore Games
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SECTION -->
+
+<section class="section">
+
+<h1 class="big">
+Built For <br>
+<span>Gamers</span>
+</h1>
+
+<div class="grid">
+
+<div class="feature">
+
+<h2>
+Custom Servers
+</h2>
+
+<p>
+Massive custom systems, events,
+economies, roleplay mechanics,
+and advanced gaming experiences.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>
+Creator Community
+</h2>
+
+<p>
+Join streamers, creators,
+competitive squads, and active communities.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>
+Futuristic Systems
+</h2>
+
+<p>
+Animated interfaces, custom bots,
+live statistics, and immersive interactions.
+</p>
+
+</div>
+
+</div>
+
+<!-- MARQUEE -->
+
+<div class="marquee">
+
+<div class="track">
+
+<span>minecraft</span>
+<span>valorant</span>
+<span>fortnite</span>
+<span>gta</span>
+<span>gaming</span>
+<span>community</span>
+<span>minecraft</span>
+<span>valorant</span>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Gaming Community Universe
+</footer>
+
+<!-- THREE JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+
+<script>
+
+/* ================================================= */
+/* CURSOR */
+/* ================================================= */
+
+const cursor=document.querySelector('.cursor');
+
+document.addEventListener('mousemove',(e)=>{
+
+cursor.style.left=e.clientX+'px';
+cursor.style.top=e.clientY+'px';
+
+});
+
+/* ================================================= */
+/* THREE JS */
+/* ================================================= */
+
+const scene=new THREE.Scene();
+
+const camera=new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+const renderer=new THREE.WebGLRenderer({
+canvas:document.getElementById('bg'),
+alpha:true,
+antialias:true
+});
+
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+camera.position.z=5;
+
+/* ================================================= */
+/* PARTICLES */
+/* ================================================= */
+
+const particlesGeometry=
+new THREE.BufferGeometry();
+
+const particlesCount=6000;
+
+const posArray=
+new Float32Array(particlesCount*3);
+
+for(let i=0;i<particlesCount*3;i++){
+
+posArray[i]=(Math.random()-0.5)*25;
+
 }
 
+particlesGeometry.setAttribute(
+'position',
+new THREE.BufferAttribute(posArray,3)
+);
+
+const particlesMaterial=
+new THREE.PointsMaterial({
+
+size:0.015,
+color:'#8f5cff'
+
+});
+
+const particlesMesh=
+new THREE.Points(
+particlesGeometry,
+particlesMaterial
+);
+
+scene.add(particlesMesh);
+
+/* ================================================= */
+/* TORUS */
+/* ================================================= */
+
+const geometry=
+new THREE.TorusGeometry(1.5,0.4,16,100);
+
+const material=
+new THREE.MeshBasicMaterial({
+
+color:'#8f5cff',
+wireframe:true
+
+});
+
+const torus=
+new THREE.Mesh(
+geometry,
+material
+);
+
+scene.add(torus);
+
+/* ================================================= */
+/* ANIMATION */
+/* ================================================= */
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+particlesMesh.rotation.y += 0.0008;
+particlesMesh.rotation.x += 0.0003;
+
+torus.rotation.x += 0.01;
+torus.rotation.y += 0.005;
+
+renderer.render(scene,camera);
+
 }
+
+animate();
+
+/* ================================================= */
+/* MOUSE */
+/* ================================================= */
+
+document.addEventListener('mousemove',(event)=>{
+
+const mouseX=
+(event.clientX/window.innerWidth)-0.5;
+
+const mouseY=
+(event.clientY/window.innerHeight)-0.5;
+
+torus.rotation.y=mouseX*2;
+torus.rotation.x=mouseY*2;
+
+});
+
+/* ================================================= */
+/* RESIZE */
+/* ================================================= */
+
+window.addEventListener('resize',()=>{
+
+camera.aspect=
+window.innerWidth/window.innerHeight;
+
+camera.updateProjectionMatrix();
+
+renderer.setSize(
+window.innerWidth,
+window.innerHeight
+);
+
+});
+
+/* ================================================= */
+/* 3D TILT */
+/* ================================================= */
+
+document.querySelectorAll('.feature').forEach(card=>{
+
+card.addEventListener('mousemove',(e)=>{
+
+const rect=card.getBoundingClientRect();
+
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+
+const centerX=rect.width/2;
+const centerY=rect.height/2;
+
+const rotateX=((y-centerY)/20);
+const rotateY=((centerX-x)/20);
+
+card.style.transform=
+`rotateX(${rotateX}deg)
+rotateY(${rotateY}deg)
+translateY(-10px)`;
+
+});
+
+card.addEventListener('mouseleave',()=>{
+
+card.style.transform=
+'rotateX(0deg) rotateY(0deg) translateY(0px)';
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
